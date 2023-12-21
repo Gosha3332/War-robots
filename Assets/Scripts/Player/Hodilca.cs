@@ -9,24 +9,33 @@ public class Hodilca : MonoBehaviour
     private CharacterController _ch;
     private float Forse;
     [SerializeField] private float _speed;
-    [SerializeField] private Transform _Camera;
-    public float jumpForse;
+    private float jumpForse = 10;
+    private Vector3 hodilka;
 
     private void Start() { _ch = GetComponent<CharacterController>(); }
     private void FixedUpdate()
     {
         hodit();
-        Forse = -10 * Time.deltaTime * 10f;
+
     }
     private void hodit()
     {
-        Vector3 hodilka;
+        hodilka = Vector3.zero;
+        hodilka.x = _joystick.Horizontal;
+        hodilka.z = _joystick.Vertical;
+        
         hodilka.y = Forse;
-        hodilka = _Camera.forward * _joystick.Vertical + _joystick.Horizontal * _Camera.right + transform.up * hodilka.y;
+        hodilka = transform.right * hodilka.x + transform.forward * hodilka.z + transform.up * hodilka.y;
         _ch.Move(hodilka * _speed * Time.deltaTime);
+        Forse = -14 * Time.deltaTime;
     }
-    public void Jump() { Forse = jumpForse; }
+    public void Jump()
+    {
+        if (_ch.isGrounded)
+        {
+            Forse = jumpForse;
+        }
 
-
+    }
 
 }

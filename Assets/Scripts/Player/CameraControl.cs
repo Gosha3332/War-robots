@@ -10,14 +10,16 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private float sensivity;
     private int FingerId;
 
-    private Vector2 AnglRotate;
-    private float AnglX;
-    private float AnglY;
-
     private float WichScreenSize;
+
+    private Vector2 LookInput;
+    private float CameraPitch;
+
+
 
     void Start()
     {
+        Time.timeScale = 1.0f;
         FingerId = -1;
         WichScreenSize = Screen.width / 2;
     }
@@ -56,13 +58,13 @@ public class CameraControl : MonoBehaviour
                 case TouchPhase.Moved:
                     if (touch.fingerId == FingerId)
                     {
-                        AnglRotate = touch.deltaPosition * sensivity * Time.deltaTime;
+                        LookInput = touch.deltaPosition * sensivity * Time.deltaTime;
                     }
                     break;
                 case TouchPhase.Stationary:
                     if (touch.fingerId == FingerId)
                     {
-                        AnglRotate = Vector2.zero;
+                        LookInput = Vector2.zero;
                     }
                     break;
             }
@@ -70,11 +72,9 @@ public class CameraControl : MonoBehaviour
     }
     private void CameraRot()
     {
-        AnglX = Mathf.Clamp(AnglX - AnglRotate.y, -69, 69);
-        //AnglY = Mathf.Clamp(AnglY - AnglRotate.x, -360, 360);
-        Camera.localRotation = Quaternion.Euler(AnglX,0, 0);
-        transform.localRotation = Quaternion.Euler(AnglX, 0, 0);
+        CameraPitch = Mathf.Clamp(CameraPitch - LookInput.y, -90, 90);
+        Camera.localRotation = Quaternion.Euler(CameraPitch, 0, 0);
 
-        transform.Rotate(transform.up, AnglRotate.x);
+        transform.Rotate(transform.up, LookInput.x);
     }
 }

@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Vragi : MonoBehaviour
 {
-    public int health = 3;
-    private void Update()
+    public int health;
+    [SerializeField] private Win Metod;
+
+    private void FixedUpdate()
     {
         if (health <= 0){ Destroy(gameObject); }       
     }
     public void Damage()
     {
         health--;
+        if (health <= 0) { Metod.killed();}
     }
 }

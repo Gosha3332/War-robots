@@ -5,21 +5,21 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     [SerializeField] private GameObject vrag;
-    void FixedUpdate()
+    private void Start()
     {
-        StartCoroutine(sp());
+        StartCoroutine(spawn());
     }
-
-    private IEnumerator sp()
+    private void sp()
+    {
+        Instantiate(vrag, transform.position, transform.rotation);
+    }
+    private IEnumerator spawn()
     {
         while (true)
         {
-            yield return new WaitForSeconds(10);
-            spawn();
+            sp();
+            yield return new WaitForSeconds(12);
         }
-    }
-    private void spawn()
-    {
-        Instantiate(vrag);
+
     }
 }

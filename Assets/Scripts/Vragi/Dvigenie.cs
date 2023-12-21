@@ -11,6 +11,7 @@ public class Dvigenie : MonoBehaviour
 
     private void FixedUpdate()
     {
+        transform.LookAt(Player.transform);
         _rb.velocity = new Vector3(Player.position.x-transform.position.x  ,_rb.velocity.y, Player.position.z - transform.position.z);
     }
 }

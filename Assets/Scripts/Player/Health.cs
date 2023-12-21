@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    private int heals = 10;
+    private int heals = 15;
     [SerializeField] private GameObject Panel;
     [SerializeField] private Text textHeals;
     
@@ -19,8 +19,9 @@ public class Health : MonoBehaviour
         { 
             Panel.SetActive(true);
             Time.timeScale = 0f;
+            LoadScene.dead = true;
         }
-        textHeals.text = heals.ToString() + "/10";	
+        textHeals.text = heals.ToString() + "/15";	
     }
-    
+
 }

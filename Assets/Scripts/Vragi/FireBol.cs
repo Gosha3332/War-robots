@@ -10,7 +10,7 @@ public class FireBol : MonoBehaviour
     }
     private IEnumerator ydolat()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.9f);
         Destroy(gameObject);
     }
 }
